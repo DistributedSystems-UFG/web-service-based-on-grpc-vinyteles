@@ -18,7 +18,23 @@ service EmployeeService {
   rpc DeleteEmployee (EmployeeID) returns (StatusReply) {}
   // List all employees
   rpc ListAllEmployees (EmptyMessage) returns (EmployeeDataList) {}
-  
+  // List all titles
+  rpc ListAllTitles (EmptyMessage) returns (EmployeeTitleList){}
+  // List all employees by title
+  rpc ListAllEmployeesByTitle (EmployeeTitle) returns (EmployeeNameList){}
+
+}
+
+message EmployeeTitle {
+  string title = 1;
+}
+
+message EmployeeNameList {
+  repeated string employee_name = 1;
+}
+
+message EmployeeTitleList {
+  repeated string title = 1;
 }
 
 message EmployeeData {

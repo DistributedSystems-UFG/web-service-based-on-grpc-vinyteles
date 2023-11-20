@@ -21,6 +21,25 @@ empDB=[
  ]
 
 class EmployeeServer(EmployeeService_pb2_grpc.EmployeeServiceServicer):
+  def ListAllEmployeesByTitle(self, request, context):
+    title = request.title
+    list = EmployeeService_pb2.EmployeeNameList()
+
+    for emp in empDB:
+      if emp['title'] == title:
+        list.employee_name.append(emp['name'])
+
+    return list
+  def ListAllTitles(self, request, context):
+
+    list = EmployeeService_pb2.EmployeeTitleList()
+
+    for emp in empDB:
+      if emp['title'] not in empDB:
+        list.title.append(emp['title'])
+
+    return list
+
 
   def CreateEmployee(self, request, context):
     dat = {
